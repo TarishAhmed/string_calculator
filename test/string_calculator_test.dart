@@ -8,7 +8,7 @@ void main() {
     setUp(() {
       calculator = StringCalculator();
     });
-    
+
     // Empty string returns 0
     test('Empty string returns 0', () {
       expect(calculator.add(''), 0);
@@ -39,6 +39,18 @@ void main() {
     test('should support different custom delimiters', () {
       expect(calculator.add('//|\n1|2|3'), equals(6));
       expect(calculator.add('//***\n1***2***3'), equals(6));
+    });
+
+    // blocking negative numbers
+    test('should throw exception for negative numbers', () {
+      expect(
+        () => calculator.add('-1'),
+        throwsA(isA<ArgumentError>().having(
+          (e) => e.message,
+          'message',
+          contains('negative numbers not allowed'),
+        )),
+      );
     });
   });
 }
