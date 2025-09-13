@@ -18,11 +18,17 @@ class StringCalculator {
             .where((s) => s.isNotEmpty)
             .toList();
 
-        // Check for negative numbers and throw an error
+        // Check for negative numbers and collect them
+        List<String> negativeNumbers = [];
         for (var number in numbers) {
           if (int.parse(number) < 0) {
-            throw ArgumentError('negative numbers not allowed: $number');
+            negativeNumbers.add(number);
           }
+        }
+        
+        // If any negative numbers found, throw error with all of them
+        if (negativeNumbers.isNotEmpty) {
+          throw ArgumentError('negative numbers not allowed: ${negativeNumbers.join(', ')}');
         }
 
         return numbers.map(int.parse).reduce((a, b) => a + b);
@@ -35,11 +41,17 @@ class StringCalculator {
       List<String> numbers =
           input.split(RegExp(r'[,\n]')).where((s) => s.isNotEmpty).toList();
 
-      // Check for negative numbers and throw an error
+      // Check for negative numbers and collect them
+      List<String> negativeNumbers = [];
       for (var number in numbers) {
         if (int.parse(number) < 0) {
-          throw ArgumentError('negative numbers not allowed: $number');
+          negativeNumbers.add(number);
         }
+      }
+      
+      // If any negative numbers found, throw error with all of them
+      if (negativeNumbers.isNotEmpty) {
+        throw ArgumentError('negative numbers not allowed: ${negativeNumbers.join(', ')}');
       }
 
       return numbers.map(int.parse).reduce((a, b) => a + b);

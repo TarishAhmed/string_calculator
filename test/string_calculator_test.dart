@@ -52,5 +52,17 @@ void main() {
         )),
       );
     });
+
+    // showing all the negative numbers which caused the exception
+    test('should show all negative numbers in exception message', () {
+      expect(
+        () => calculator.add('-1,2,-3'),
+        throwsA(isA<ArgumentError>().having(
+          (e) => e.message,
+          'message',
+          contains('-1, -3'),
+        )),
+      );
+    });
   });
 }
