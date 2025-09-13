@@ -6,6 +6,9 @@ class StringCalculator {
     if (input.contains(',')) {
       return input.split(',').map(int.parse).reduce((a, b) => a + b);
     }
+    if (input.contains('\n')) {
+      return input.split('\n').map(int.parse).reduce((a, b) => a + b);
+    }
     return int.parse(input);
   }
 }
