@@ -2,36 +2,43 @@ import 'package:test/test.dart';
 import 'package:string_calculator/string_calculator.dart';
 
 void main() {
-
-
-
   group('String Calculator', () {
-  
-  StringCalculator stringCalculator = StringCalculator();
-  // Empty string returns 0
-  test('Empty string returns 0', () {
-      expect(stringCalculator.calculate(''), 0);
+    StringCalculator calculator = StringCalculator();
+
+    setUp(() {
+      calculator = StringCalculator();
+    });
+    
+    // Empty string returns 0
+    test('Empty string returns 0', () {
+      expect(calculator.add(''), 0);
     });
 
     // Single number returns the number
     test('Single number returns the number', () {
-      expect(stringCalculator.calculate('1'), 1);
+      expect(calculator.add('1'), 1);
     });
 
     // Two numbers delimited by comma returns the sum
     test('Two numbers, comma delimited, returns the sum', () {
-      expect(stringCalculator.calculate('1,2'), 3);
+      expect(calculator.add('1,2'), 3);
     });
 
     // any amount of numbers delimited by comma returns the sum
     test('Any amount of numbers, comma delimited, returns the sum', () {
-      expect(stringCalculator.calculate('1,2,3,4,5'), 15);
+      expect(calculator.add('1,2,3,4,5'), 15);
     });
 
     // handle newlines between numbers delimited by comma returns the sum
-    test('Handle newlines between numbers delimited by comma returns the sum', () {
-      expect(stringCalculator.calculate('1\n2,3'), 6);
+    test('Handle newlines between numbers delimited by comma returns the sum',
+        () {
+      expect(calculator.add('1\n2,3'), 6);
     });
-    
+
+    // Edge case handling different custom delimiters
+    test('should support different custom delimiters', () {
+      expect(calculator.add('//|\n1|2|3'), equals(6));
+      expect(calculator.add('//***\n1***2***3'), equals(6));
+    });
   });
 }

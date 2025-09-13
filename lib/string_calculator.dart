@@ -1,8 +1,26 @@
 class StringCalculator {
-  int calculate(String input) {
+  int add(String input) {
     if (input.isEmpty) {
       return 0;
     }
+        // Check for custom delimiter format: //delimiter\nnumbers
+    if (input.startsWith('//')) {
+      int newlineIndex = input.indexOf('\n');
+      if (newlineIndex != -1) {
+        String delimiter = input.substring(2, newlineIndex);
+        String numbersPart = input.substring(newlineIndex + 1);
+        
+        // Handle multi-character delimiters by escaping special regex characters
+        String escapedDelimiter = RegExp.escape(delimiter);
+        List<String> numbers = numbersPart
+            .split(RegExp(escapedDelimiter))
+            .where((s) => s.isNotEmpty)
+            .toList();
+        
+        return numbers.map(int.parse).reduce((a, b) => a + b);
+      }
+    }
+    
     // Handle both comma and newline delimiters
     if (input.contains(',') || input.contains('\n')) {
       // Split by both comma and newline, then filter out empty strings
