@@ -8,3 +8,5 @@
 # Flutter
 .flutter-plugins
 .flutter-plugins-dependencies
+
+.dart_tool/test/incremental_kernel.Ly9AZGFydD0zLjA=

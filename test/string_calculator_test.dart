@@ -22,7 +22,11 @@ void main() {
     test('Two numbers, comma delimited, returns the sum', () {
       expect(stringCalculator.calculate('1,2'), 3);
     });
-    
+
+    // any amount of numbers, comma delimited, returns the sum
+    test('Any amount of numbers, comma delimited, returns the sum', () {
+      expect(stringCalculator.calculate('1,2,3,4,5'), 15);
+    });
     
   });
 }
