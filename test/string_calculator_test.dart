@@ -17,6 +17,11 @@ void main() {
     test('Single number returns the number', () {
       expect(stringCalculator.calculate('1'), 1);
     });
+
+    // Two numbers, comma delimited, returns the sum
+    test('Two numbers, comma delimited, returns the sum', () {
+      expect(stringCalculator.calculate('1,2'), 3);
+    });
     
     
   });
